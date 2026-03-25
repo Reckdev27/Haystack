@@ -50,5 +50,5 @@ The documentation explains:
 
 Once you've reviewed the documentation:
 
-```bash
-git clone https://github.com/your-repo/haystack-di.git
+```Link
+https://github.com/Reckdev27/Haystack
