@@ -1,0 +1,13 @@
+Haystack Dependency Injection Documentation
+Introduction
+The Haystack Dependency Injection package simplifies managing dependencies in Unity
+projects. This guide provides an overview of setup, key attributes, and example implementations.
+Key Attributes
+ [Haystack.Inject]: Marks fields to be injected with dependencies.
+ [Haystack.Install]: Marks fields to be installed with dependencies.
+ [Haystack.DirectHayClass]: Indicates that the class uses direct injection with tags or keys.
+ [Haystack.PhysicsClass]: Specifies that the class handles physics-related injections.
+Direct Injection Overview
+Direct Injection in Haystack allows you to specify dependencies directly in your Unity scripts
+using tags or keys. This method is straightforward and useful for cases where you need to
+explicitly define which dependencies should be injected into your components
