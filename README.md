@@ -288,5 +288,5 @@ Menu:
 
 ---
 
-## License / Usage
+## License
 Opensource
