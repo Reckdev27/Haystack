@@ -289,4 +289,4 @@ Menu:
 ---
 
 ## License / Usage
-Free to all
+Free Opensource
