@@ -269,15 +269,6 @@ Menu:
 
 ---
 
-## Script Protection Notes
-
-Haystack includes package script protection for framework logic in `Core`, `Runtime`, and `Editor`:
-- Protected files can be restored to sealed defaults during verification.
-- Security snapshot is stored in `Assets/Haystack/Resources/HayGuard.bytes`.
-- Trademark/identity metadata is stored in `Assets/Haystack/Resources/HayTM.bytes`.
-
----
-
 ## Platform Notes
 
 - Prefer coroutines (`IEnumerator`) over `async/await` for WebGL compatibility.
@@ -298,6 +289,4 @@ Haystack includes package script protection for framework logic in `Core`, `Runt
 ---
 
 ## License / Usage
-
-Set your project/package license terms here.  
-If distributing on GitHub or Unity Asset Store, include explicit license and support policy in this section.
+Free to all
