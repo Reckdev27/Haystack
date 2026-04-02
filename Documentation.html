@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Haystack Dependency Injection</title>
+  <style>
+    :root {
+      --bg: #121216;
+      --panel: #1c1c22;
+      --outline: #a82323;
+      --text: #f3f4f6;
+      --muted: #c7c9d1;
+      --primary: #f44336;
+      --secondary: #2979ff;
+      --accent: #ffc107;
+      --success: #43a047;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 15px/1.6 "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #111216 0%, #18191f 100%);
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 36px 40px 60px;
+    }
+
+    .hero {
+      border: 2px solid var(--outline);
+      background: var(--panel);
+      padding: 24px 28px;
+      border-radius: 18px;
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      width: 88px;
+      height: 88px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      border: 2px solid rgba(255,255,255,0.08);
+    }
+
+    h1, h2, h3 { margin: 0 0 10px; line-height: 1.2; }
+    h1 { font-size: 34px; }
+    h2 {
+      font-size: 22px;
+      margin-top: 28px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(168, 35, 35, 0.45);
+    }
+    h3 { font-size: 17px; margin-top: 20px; }
+
+    p, li { color: var(--muted); }
+    code, pre {
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 13px;
+    }
+    code {
+      background: rgba(255,255,255,0.06);
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: var(--text);
+    }
+    pre {
+      margin: 14px 0;
+      padding: 16px 18px;
+      background: #0f1014;
+      border: 1px solid rgba(168, 35, 35, 0.5);
+      border-radius: 14px;
+      overflow: hidden;
+      white-space: pre-wrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .card {
+      border: 1px solid rgba(168, 35, 35, 0.45);
+      background: rgba(28, 28, 34, 0.94);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    .primary { background: rgba(244, 67, 54, 0.18); color: #ffb3ad; }
+    .secondary { background: rgba(41, 121, 255, 0.18); color: #b8d4ff; }
+    .accent { background: rgba(255, 193, 7, 0.18); color: #ffe39a; }
+    .success { background: rgba(67, 160, 71, 0.18); color: #b6e2b9; }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      background: rgba(255, 193, 7, 0.08);
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin: 14px 0;
+    }
+
+    .footer {
+      margin-top: 36px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: #9ca1af;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="logo">R</div>
+      <div>
+        <h1>Haystack Dependency Injection</h1>
+        <p>Runtime and editor guide for the RD.Framework Haystack package.</p>
+        <div>
+          <span class="chip primary">Direct Injection</span>
+          <span class="chip secondary">Indirect Builder</span>
+          <span class="chip accent">Collider Injection</span>
+          <span class="chip success">Author: Reckdev</span>
+        </div>
+      </div>
+    </section>
+
+    <h2>Benefits of Using Haystack</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Cleaner Architecture</h3>
+        <p>Dependencies are declared with attributes and installed in one place, reducing tight coupling and making gameplay systems easier to maintain.</p>
+      </div>
+      <div class="card">
+        <h3>Faster Iteration</h3>
+        <p>Direct, indirect, and manual binding flows let you adapt quickly to scene-based or runtime-generated objects without rewriting core systems.</p>
+      </div>
+      <div class="card">
+        <h3>Cross-Platform Friendly</h3>
+        <p>Coroutine-based setup support avoids <code>async</code>/<code>await</code> pitfalls on WebGL while keeping behavior consistent on desktop and mobile.</p>
+      </div>
+      <div class="card">
+        <h3>Debuggable Runtime</h3>
+        <p>Try-resolve, explicit unbind, and targeted key slots help isolate dependency issues during play mode with predictable results.</p>
+      </div>
+      <div class="card">
+        <h3>Gameplay-Aware Injection</h3>
+        <p>Collider and Collider2D dependency paths enable interaction-driven DI patterns for pickup, overlap, trigger, and combat systems.</p>
+      </div>
+      <div class="card">
+        <h3>Package-Ready Workflow</h3>
+        <p>Editor inspectors, runtime config assets, and protected core/runtime scripts keep your framework organized and easier to ship as a package.</p>
+      </div>
+    </div>
+
+    <h2>Core API</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Attributes</h3>
+        <ul>
+          <li><code>[Inject]</code> injects a registered dependency.</li>
+          <li><code>[Install]</code> registers a dependency.</li>
+          <li><code>[HayDirectClass]</code> opts a class into scene-scan install and inject passes.</li>
+          <li><code>[HayPhysicsClass]</code> enables collider-based dependency pickup.</li>
+          <li><code>[HayInstallingMethod]</code> runs before installation and may return <code>IEnumerator</code> for coroutine-based setup.</li>
+          <li><code>[HayInjectedMethod]</code> runs after injection and may return <code>IEnumerator</code> for coroutine-based setup.</li>
+          <li>Prefer <code>IEnumerator</code> coroutines over <code>async</code>/<code>await</code> for WebGL compatibility.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Runtime Helpers</h3>
+        <ul>
+          <li><code>IndirectHayBuilder.InstallAll()</code> installs by custom key.</li>
+          <li><code>IndirectHayBuilder.InjectAll()</code> injects by custom key.</li>
+          <li><code>Haystack.BindDependency&lt;T&gt;()</code> and <code>Haystack.BindStaticDependency&lt;T&gt;()</code> register dependencies manually.</li>
+          <li><code>Haystack.TryResolve&lt;T&gt;()</code> and <code>Haystack.Resolve&lt;T&gt;()</code> fetch dependencies manually.</li>
+          <li><code>Haystack.Refresh()</code> rescans direct classes created after scene load.</li>
+          <li><code>Haystack.Reset()</code> clears and rebuilds the runtime container.</li>
+          <li><code>Collider.InjectDependency&lt;T&gt;()</code> resolves 3D collider dependencies.</li>
+          <li><code>Collider2D.InjectDependency&lt;T&gt;()</code> resolves 2D collider dependencies.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Direct Injection</h2>
+    <p>Use direct injection for scene objects that are already present when the scene loads.</p>
+<pre><code>[HayDirectClass]
+public class SampleInstaller : MonoBehaviour
+{
+    [SerializeField, Install] SampleDependency _sample;
+
+    [HayInstallingMethod]
+    protected void Awaker()
+    {
+        Debug.Log("Dependencies Installed.");
+    }
+}
+
+[HayDirectClass]
+public class SampleInjector : MonoBehaviour
+{
+    [SerializeField, Inject] SampleDependency _sample;
+
+    [HayInjectedMethod]
+    protected void Starter()
+    {
+        Debug.Log(_sample.Time);
+    }
+}</code></pre>
+
+    <div class="note">
+      If you instantiate a new direct class at runtime, call <code>Haystack.Refresh()</code> so the initializer can scan it.
+    </div>
+
+    <h2>Indirect Builder</h2>
+    <p>Use indirect injection when the dependency source changes at runtime or you want to resolve by custom key.</p>
+<pre><code>public class CustomPkVariant : MonoBehaviour
+{
+    [SerializeField] string _customKey;
+    [SerializeField, Install] CustomKDependency _dependency;
+    readonly IndirectHayBuilder _builder = new IndirectHayBuilder();
+
+    void Awake() => _builder.InstallAll(this, _customKey);
+}
+
+public class CustomKManager : MonoBehaviour
+{
+    [Inject] CustomKDependency _dependency;
+    readonly IndirectHayBuilder _builder = new IndirectHayBuilder();
+
+    public void SetToPlayer1()
+    {
+        _builder.InjectAll(this, () =>
+        {
+            Debug.Log(_dependency.Name);
+        }, "player-1");
+    }
+}</code></pre>
+
+    <h2>Manual Bind And Resolve</h2>
+    <p>Use manual binding when you want a lightweight container-style workflow without adding installer components.</p>
+<pre><code>Haystack.BindDependency(new SampleDependency { Time = 12f });
+
+if (Haystack.TryResolve&lt;SampleDependency&gt;(out var dependency))
+{
+    Debug.Log(dependency.Time);
+}
+
+Haystack.BindStaticDependency("1.0.0", key: "version");
+Debug.Log(Haystack.ResolveStatic&lt;string&gt;("version"));</code></pre>
+    <p>Prefer <code>TryResolve</code> when a dependency may be absent. <code>Resolve</code> returns the default value and logs a warning when nothing is bound.</p>
+    <p>Sample scripts for this flow are included in <code>Assets/Haystack/Demo/Sample Demo/InjectionDemo/Assets/Scripts/DemoScripts/ManualBindingSample</code>.</p>
+
+    <p>You can also register collider entries directly at runtime.</p>
+<pre><code>Haystack.BindColliderDependency(playerCollider, new PlayerDependencies());
+Haystack.BindCollider2DDependency(trigger2D, new PlayerDependencies());</code></pre>
+
+    <h2>Collider Injection</h2>
+    <p>Install a dependency against the collider on the same object, then fetch it from overlap, raycast, collision, or trigger callbacks.</p>
+<pre><code>public class SamplePlayer : MonoBehaviour
+{
+    [SerializeField, Install(HayComponent.Collider)]
+    PlayerDependencies _playerDependencies;
+
+    readonly IndirectHayBuilder _builder = new IndirectHayBuilder();
+    void Awake() => _builder.InstallAll(this);
+}
+
+[HayPhysicsClass]
+public class SampleTrigger : MonoBehaviour
+{
+    void OnTriggerEnter(Collider other)
+    {
+        other.InjectDependency&lt;PlayerDependencies&gt;(this, dep =>
+        {
+            Debug.Log(dep.GameObject.name);
+        });
+    }
+}</code></pre>
+
+<pre><code>public class Combat2DEnemy : MonoBehaviour
+{
+    [Install(HayComponent.Collider2D)]
+    Action&lt;int&gt; _takeDamage;
+}</code></pre>
+
+    <h2>Static Injection</h2>
+<pre><code>[HayDirectClass]
+public static class SampleStatic1
+{
+    [Install] public static string Dependency;
+
+    [HayInstallingMethod]
+    public static void Awaker() => Dependency = "Reckdev";
+}
+
+[HayDirectClass]
+public static class SampleStaticConsumer
+{
+    [Inject] public static string Dependency;
+}</code></pre>
+
+    <h2>Links</h2>
+    <p><code>IHaystackLink</code> is a lightweight broadcast channel for manual runtime fan-out.</p>
+<pre><code>public class LinkManager : MonoBehaviour
+{
+    [SerializeField] LinkDependency _managerDependency;
+    void Start() => Haystack.WeLinks.FireLinks(_managerDependency);
+}
+
+public class LinkPlayer : MonoBehaviour, IHaystackLink
+{
+    void Awake() => Haystack.WeLinks.AddLink(this);
+    public void Link(object dependency) { }
+}</code></pre>
+
+    <h2>Unbinding</h2>
+    <p>Use <code>HayBind.UnbindAfterInjection</code> to consume a dependency once after a full injection pass completes.</p>
+<pre><code>public class SUManager : MonoBehaviour
+{
+    [Inject(HayBind.UnbindAfterInjection)]
+    CustomKDependency _customDependency;
+}</code></pre>
+
+    <p>You can manually clear direct and static registrations at runtime as well.</p>
+<pre><code>Haystack.Unbind&lt;CustomKDependency&gt;(customKey: playerKey);
+Haystack.UnbindStatic&lt;GameConfig&gt;();</code></pre>
+
+    <p>For collider entries you can manually clear the registration with <code>collider.Unbind()</code> or <code>collider2D.Unbind2D()</code>.</p>
+    <p>Unbinding affects the exact binding slot identified by dependency type, inject key, and custom key. Other registrations of the same type remain available unless they share the same slot.</p>
+    <p>If you consume a slot with <code>HayBind.UnbindAfterInjection</code>, install or register that same slot again before expecting another inject to resolve it.</p>
+
+    <h2>Legacy Aliases</h2>
+    <p>The framework still accepts the old documentation names so older code keeps compiling:</p>
+    <ul>
+      <li><code>[Haystack.Inject]</code> and <code>[Haystack.Install]</code></li>
+      <li><code>[Haystack.DirectHayClass]</code> and <code>[Haystack.PhysicsClass]</code></li>
+      <li><code>[HayAwaker]</code> and <code>[HayStarter]</code></li>
+      <li><code>Haystack.Component.Collider</code> and <code>Haystack.ColliderType.Collider3D</code></li>
+      <li><code>Haystack.Bind.UnbindAfterInjection</code></li>
+    </ul>
+
+    <h2>Package Structure</h2>
+    <ul>
+      <li><code>Assets/Haystack/Core/HaystackCore.cs</code> contains the package registry, binding, and injection core logic.</li>
+      <li><code>Assets/Haystack/Runtime/Haystack.cs</code> exposes the public DI API and runtime-facing helpers.</li>
+      <li><code>Assets/Haystack/Resources/HayConfig.asset</code> stores runtime configuration.</li>
+      <li><code>Assets/Haystack/Resources/HayEditorSettings.asset</code> stores editor colors.</li>
+      <li><code>Assets/Haystack/Resources/HayTM.bytes</code> stores the encrypted Haystack trademark data used by the custom inspectors and window.</li>
+      <li><code>Assets/Haystack/Demo</code> contains the packaged sample scenes, demo scripts, and shared demo art.</li>
+      <li><code>Tools/Haystack/Haystack</code> opens the Haystack control panel.</li>
+    </ul>
+
+    <div class="footer">
+      Haystack documentation regenerated to match the current runtime and demo scripts.
+    </div>
+  </main>
+</body>
+</html>
+
+
+
