@@ -1,4 +1,3 @@
-```md
 # HAYSTACK v3.0.2
 
 ## Short Description
