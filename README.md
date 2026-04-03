@@ -1,5 +1,7 @@
 ```md
-# Haystack Dependency Injection (RD.Framework)
+# HAYSTACK
+
+## Haystack Dependency Injection (RD.Framework)
 
 Haystack is a Unity dependency injection framework focused on clean architecture, runtime flexibility, and editor tooling.
 
@@ -182,5 +184,4 @@ Includes direct, indirect, static, collider, manual binding, and unbinding sampl
 
 Internal/package license as defined by the publisher.
 ```
-
-Opensource
+OPENSOURCE
