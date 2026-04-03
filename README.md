@@ -1,4 +1,4 @@
-# HAYSTACK V3.0.1
+# HAYSTACK v3.0.1
 
 ## Haystack Dependency Injection (Unity Engine Framework)
 
