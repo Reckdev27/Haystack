@@ -1,4 +1,3 @@
-```md
 # HAYSTACK
 
 ## Haystack Dependency Injection (RD.Framework)
