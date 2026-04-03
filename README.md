@@ -145,14 +145,6 @@ other.InjectDependency<PlayerDependencies>(this, dep =>
 - `Haystack.Unbind<T>(key, customKey)` removes only the matching slot.
 - Reinstall/rebind is required to use that slot again.
 
-## Editor Tools
-
-- **Tools > Haystack > Haystack**  
-  Opens control/config window.
-- Custom inspector header badge uses **R** branding.
-- Component/Injection Summary panel is toggleable (default hidden).
-- Serialized fields remain visible.
-
 ## Demos
 
 Located under:
