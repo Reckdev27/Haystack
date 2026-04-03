@@ -153,11 +153,6 @@ other.InjectDependency<PlayerDependencies>(this, dep =>
 - Component/Injection Summary panel is toggleable (default hidden).
 - Serialized fields remain visible.
 
-## Security Notes
-
-- Protection mode is controlled by config.
-- Docs intentionally avoid exposing internal protection implementation details.
-
 ## Demos
 
 Located under:
