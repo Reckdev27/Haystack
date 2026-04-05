@@ -1,4 +1,4 @@
-# HAYSTACK PRO v3.0.3
+# HAYSTACK PRO v3.0.4
 
 ## Short Description
 
